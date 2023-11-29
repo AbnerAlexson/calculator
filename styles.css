@@ -6,5 +6,89 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: antiquewhite;
 }
 
+#calculator {
+    background-color:  #1f223d;
+    border: 2px solid #121212;
+    border-radius: 8px;
+    height: 400px;
+    width: 400px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#display {
+    background-color: #292c42;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    height: 20%;
+    margin-bottom: 10px;
+    font-size: 55px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+#buttons {
+    background: #1a1c2b;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    height: 70%;
+    font-size: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btnRow1, .btnRow2, .btnRow3, .btnRow4, .btnRow5 {
+    border: 0px solid black;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.btnRow1, .btnRow5 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btnRow2, .btnRow3, .btnRow4 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn {
+    background-color: #25283d;
+    color: #fff;
+    font-size: 30px;
+    width: 90px;
+    height: 45px;
+}
+
+.ac, .zero {
+    width: 193px;
+}
+
+.ac {
+    font-size: 25px;
+}
+
+.dlt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
