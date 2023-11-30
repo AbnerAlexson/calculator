@@ -25,7 +25,10 @@ clearBtn.addEventListener('click', () => {
     storeOperand = '';
 })
 deleteBtn.addEventListener('click', () => {
-
+    deleteNum()
+});
+equalBtn.addEventListener('click', () => {
+    display.textContent = operate(storeOperand, displayNum1, displayNum2);
 })
 
 
@@ -48,6 +51,9 @@ function pushNum(number) {
         displayNum2 += number
         display.textContent += number
     };
+    console.log(displayNum1)
+    console.log(displayNum2)
+    console.log(storeOperand)
 };
 
 function pushOperand(operator){
@@ -67,21 +73,25 @@ function clearDisplay() {
 }
 
 function deleteNum() {
-    display.textContent = display.textContent.slice(0, -1)
-    if(displayNum1 && !storeOperand) {
+    if (displayNum1 && !storeOperand) {
         displayNum1 = displayNum1.slice(0, -1)
-    } else if {
-        
-    }
+        display.textContent = display.textContent.slice(0, -1)
+    } else if (storeOperand && displayNum2) {
+        displayNum2 = displayNum2.slice(0, -1);
+        display.textContent = display.textContent.slice(0, -1)
+    };
+    console.log(displayNum1)
+    console.log(displayNum2)
+    console.log(storeOperand)
 }
 
 function addOperand(a,b) {
-    return a + b
-}  
+    return parseInt(a) + parseInt(b);
+}
 
 function subtractOperand(a,b) {
-    return a - b
-} 
+    return parseInt(a) - parseInt(b)
+};
 
 function multiplyOperand(a,b) {
     return a * b
@@ -91,8 +101,19 @@ function divideOperand(a,b) {
     return a / b
 }
 
-//function operate(operator, a, b) {
-  //  a = Number(a)
- //   b = Number(b)
- ///   switch (operator)
-//}
+function operate(operand, a, b) {
+    switch (operand) {
+        case '+':
+        return addOperand(a,b)
+        break;
+        case '-':
+        return subtractOperand(a,b)
+        break;
+        case '÷':
+        if (a == '0') return 0
+        return divideOperand(a,b)
+        break;
+        case 'x':
+        return multiplyOperand(a,b);
+    }
+}
