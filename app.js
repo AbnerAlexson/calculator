@@ -1,4 +1,4 @@
-//variables
+//variables that holds values
 let displayNum1 = '';
 let displayNum2 = '';
 let storeOperand = '';
@@ -14,6 +14,7 @@ let equalBtn = document.querySelector('.equal')
 let numBtn = document.querySelectorAll('.number')
 let operandBtn = document.querySelectorAll('.operator')
 
+//event listeners
 numBtn.forEach(numbers => {
     numbers.addEventListener('click', () => {
         if (display.textContent.length != 10 && !storeOperand) display.textContent += numbers.textContent
@@ -30,7 +31,7 @@ operandBtn.forEach(operators =>{
     operators.addEventListener('click', () => pushOperand(operators.textContent))
 })
 pointBtn.addEventListener('click', () => {
-
+    pushPoint()
 })
 
 clearBtn.addEventListener('click', () => {
@@ -43,6 +44,7 @@ equalBtn.addEventListener('click', () => {
     equal();
 })
 
+// function outputs numbers
 function pushNum(number) {
     if (storeOperand == '' && equalNum >= 1) { 
         clearAll() 
@@ -61,6 +63,7 @@ function pushNum(number) {
     console.log(displayNum2)
 }
 
+//function that outputs the calculator's operation
 function pushOperand(operator){
     if (!storeOperand && displayNum1) {
         storeOperand = operator
@@ -73,15 +76,23 @@ function pushOperand(operator){
     console.log(storeOperand)
 } 
 
+//function that output decimal point
 function pushPoint() {
-    displayNum1 += '.'
+    if (displayNum1 && displayNum1.indexOf('.') == -1 && !storeOperand && !displayNum2) {
+        displayNum1 += '.'
+        display.textContent += '.'
+    } else if (displayNum2 && displayNum2.indexOf('.') == -1 && storeOperand) {
+        displayNum2 += '.'
+        display.textContent += '.'
+    }
 }
 
+//function that calculates the numbers
 function equal() {
     equalNum = operate(storeOperand, displayNum1, displayNum2);
-    if (countDigits(equalNum) >= 4) {
+    if (countDigits(equalNum) >= 6) {
         transferNum = Number(equalNum.toFixed(0))
-    } else if (countDigits(equalNum) < 4) {
+    } else if (countDigits(equalNum) < 6) {
         transferNum = Number(equalNum.toFixed(4))
     }
     display.textContent = formatNumber(transferNum, 1e9);
@@ -90,14 +101,7 @@ function equal() {
     displayNum2 = ''
 }
 
-function clearNum() {
-    if (displayNum1) displayNum1 = '';
-}
-
-function clearOperand() {
-    if (storeOperand) storeOperand = '';
-}
-
+//function that clears everything
 function clearAll() {
     display.textContent = ''
     displayNum1 = '';
@@ -106,6 +110,7 @@ function clearAll() {
     equalNum = 0;
 }
 
+//functions that delete numbers 
 function deleteNum() {
     if (displayNum1 && !storeOperand) {
         displayNum1 = displayNum1.slice(0, -1)
@@ -116,6 +121,7 @@ function deleteNum() {
     };
 }
 
+//function that used for counting calculated number figures 
 function countDigits(number) {
     // Handle the case for zero separately
     if (number === 0) {
@@ -135,41 +141,41 @@ function countDigits(number) {
 
     return count;
 }
-console.log(countDigits(-12348.2))
 
+//calculator operation
 function addOperand(a,b) {
     if (b == null || b == '') {
         b = a;
-        return parseInt(a) + parseInt(b);
+        return parseFloat(a) + parseFloat(b);
     } else {
-        return parseInt(a) + parseInt(b);
+        return parseFloat(a) + parseFloat(b);
     }
 }
 
 function subtractOperand(a,b) {
     if (b == null || b == '') {
         b = a;
-        return parseInt(a) - parseInt(b);
+        return parseFloat(a) - parseFloat(b);
     } else {
-        return parseInt(a) - parseInt(b);
+        return parseFloat(a) - parseFloat(b);
     }
 }
 
 function multiplyOperand(a,b) {
     if (b == null || b == '') {
         b = a;
-        return parseInt(a) * parseInt(b);
+        return parseFloat(a) * parseFloat(b);
     } else {
-        return parseInt(a) * parseInt(b);
+        return parseFloat(a) * parseFloat(b);
     }
 }
 
 function divideOperand(a,b) {
     if (b == null || b == '') {
         b = a;
-        return parseInt(a) / parseInt(b);
+        return parseFloat(a) / parseFloat(b);
     } else {
-        return parseInt(a) / parseInt(b);
+        return parseFloat(a) / parseFloat(b);
     }
 }
 
@@ -190,6 +196,7 @@ function operate(operand, a, b) {
     }
 }
 
+//function that is used to reduce the figure of calculated numbers so that it does not overflow the display
 function formatNumber(num, threshold) {
     if (num >= threshold) {
         return num.toExponential(4);
