@@ -28,8 +28,11 @@ numBtn.forEach(numbers => {
 })
 operandBtn.forEach(operators =>{
     operators.addEventListener('click', () => pushOperand(operators.textContent))
-    
 })
+pointBtn.addEventListener('click', () => {
+
+})
+
 clearBtn.addEventListener('click', () => {
     clearAll();
 })
@@ -59,9 +62,21 @@ function pushNum(number) {
 }
 
 function pushOperand(operator){
-    
-    storeOperand = operator
+    if (!storeOperand && displayNum1) {
+        storeOperand = operator
+    } else if (displayNum1 && storeOperand && !displayNum2) {
+        storeOperand = operator
+    } else if (displayNum2) {
+        equal();
+        storeOperand = operator
+    }
+    console.log(storeOperand)
 } 
+
+function pushPoint() {
+    displayNum1 += '.'
+}
+
 function equal() {
     equalNum = operate(storeOperand, displayNum1, displayNum2);
     if (countDigits(equalNum) >= 4) {
