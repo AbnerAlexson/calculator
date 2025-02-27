@@ -2,7 +2,7 @@
 
 ## The Odin's Project calculator app
 
-<h2>features</h2>
+<h2>Features</h2>
 <ul>
   <li>
     the UI will be a 2D calculator similar to the calculator app found the Iphone and windows calculator 
@@ -21,7 +21,7 @@
   </l1>
 </ul>
 
-<h2>tools</h2>
+<h2>Tools</h2>
 <ul>
   <li>Vscode</li>
   <li>HTML</li>
